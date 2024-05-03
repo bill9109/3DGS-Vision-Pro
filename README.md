@@ -8,8 +8,6 @@
 ### Contents
 - [VR](#vr)
 
-## Getting Started
-
 
 ## VR Test
 [![vr-demo](./assets/images/vr-preview.jpg)](#vrtest)

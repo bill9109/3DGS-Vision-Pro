@@ -3,7 +3,7 @@ import { LumaSplatsThree } from "@lumaai/luma-web";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import { DemoProps } from ".";
 
-const capture: string = "met";
+const capture: string = "chess";
 
 export function DemoVRtest(props: DemoProps) {
 	let { renderer, camera, scene, controls, gui } = props;
