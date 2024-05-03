@@ -8,35 +8,38 @@
 ### Contents
 - [VR](#vr)
 
-
-## VR Test
-[![vr-demo](./assets/images/vr-preview.jpg)](#vrtest)
-
-Viewing your splats in VR is as simple as enabling XR in three.js and adding a VR button. View this demo with a VR headset (or through a headset browser) and click "Enter VR"! It will work best on PC VR, standalone VR tends to struggle with splats presently
-
-**[DemoVRtest.ts](./src/DemoVRtest.ts)**
+1. 点击图片
+2. 点击 ENTER VR
+3. 第一个弹窗点授权，第二个弹窗点取消，不然无法识别手势
 
 
-## VR
-[![vr-demo](./assets/images/vr-preview.jpg)](#vr)
+## 魔法棋
+[![vr-demo](./assets/images/chess.jpg)](#chess)
 
-Viewing your splats in VR is as simple as enabling XR in three.js and adding a VR button. View this demo with a VR headset (or through a headset browser) and click "Enter VR"! It will work best on PC VR, standalone VR tends to struggle with splats presently
+Redmi 和哈利波特再次联名
 
-**[DemoVR.ts](./src/DemoVR.ts)**
-```typescript
-import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
+## 人车家全生态
+[![vr-demo](./assets/images/car.jpg)](#car)
 
-renderer.xr.enabled = true;
+小米人车家全生态展厅
 
-let vrButton = VRButton.createButton(renderer);
+## 唐伯虎
+[![vr-demo](./assets/images/tangbohu.jpg)](#tangbohu)
 
-document.body.appendChild(vrButton);
+上海博物馆镇馆之宝唐伯虎《秋风纨扇图》
 
-let splats = new LumaSplatsThree({
-	// Kind Humanoid @RyanHickman
-	source: 'https://lumalabs.ai/capture/83e9aae8-7023-448e-83a6-53ccb377ec86',
-});
+## Da Vinci
+[![vr-demo](./assets/images/davinci.jpg)](#davinci)
 
-scene.add(splats);
-```
+达芬奇真迹《头发飘逸的女子》
+
+## 特斯拉机器人
+[![vr-demo](./assets/images/teslabot.jpg)](#teslabot)
+
+Optimus
+
+## 地铁
+[![vr-demo](./assets/images/subway.jpg)](#subway)
+
+纽约中央火车站
 
