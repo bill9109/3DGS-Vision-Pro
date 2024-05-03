@@ -9,15 +9,15 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nord as syntaxTheme } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Camera, CineonToneMapping, Scene, WebGLRenderer } from 'three';
 import readme from '../README.md';
-import { DemoBackgroundRemoval } from './DemoBackgroundRemoval';
-import { DemoCustomShaders } from './DemoCustomShaders';
-import { DemoFog } from './DemoFog';
-import { DemoHelloWorld } from './DemoHelloWorld';
-import { DemoLighting } from './DemoLighting';
-import { DemoReactThreeFiber } from './DemoReactThreeFiber';
-import { DemoTransmission } from './DemoTransmission';
 import { DemoVR } from './DemoVR';
 import { DemoVRtest } from './DemoVRtest';
+import { chess } from './chess';
+import { davinci } from './davinci';
+import { subway } from './subway';
+import { tangbohu } from './tangbohu';
+import { teslabot } from './teslabot';
+import { car } from './car';
+import { Baltimore } from './Baltimore';
 
 export type DemoProps = {
 	renderer: WebGLRenderer,
@@ -33,17 +33,17 @@ type DemoFn =
 
 const demos = {
 	basic: {
-		"getting-started": DemoHelloWorld,
-		"three-fog": DemoFog,
-		"background-removal": DemoBackgroundRemoval,
-		"scene-lighting": DemoLighting,
-		"custom-shaders": DemoCustomShaders,
-		"transmission": DemoTransmission,
 		"vr": DemoVR,
 		"vrtest": DemoVRtest,
+		"chess": chess,
+		"car": car,
+		"davinci": davinci,
+		"subway": subway,
+		"tangbohu": tangbohu,
+		"teslabot": teslabot,
+		"Baltimore": Baltimore,
 	} as Record<string, DemoFn>,
 	react: {
-		"react-three-fiber": DemoReactThreeFiber
 	} as Record<string, React.FC<{ gui: GUI }>>
 }
 
