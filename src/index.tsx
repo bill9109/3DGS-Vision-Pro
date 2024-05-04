@@ -18,6 +18,7 @@ import { tangbohu } from './tangbohu';
 import { teslabot } from './teslabot';
 import { car } from './car';
 import { Baltimore } from './Baltimore';
+import { may4th } from './may4th';
 
 export type DemoProps = {
 	renderer: WebGLRenderer,
@@ -42,6 +43,7 @@ const demos = {
 		"tangbohu": tangbohu,
 		"teslabot": teslabot,
 		"Baltimore": Baltimore,
+		"may4th": may4th,
 	} as Record<string, DemoFn>,
 	react: {
 	} as Record<string, React.FC<{ gui: GUI }>>
