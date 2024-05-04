@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { LumaSplatsThree } from "@lumaai/luma-web";
-import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
+import { VRButton } from "./VRButton.js";
 import { DemoProps } from ".";
 
 const capture: string = "Baltimore";
