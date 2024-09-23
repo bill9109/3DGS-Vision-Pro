@@ -4,9 +4,7 @@ import { DemoProps } from ".";
 import { setupVRControls } from './controls';
 import { sources } from './sceneConfigs';
 
-const capture: string = "davinci";
-
-export function davinci(props: DemoProps) {
+export function initializeScene(capture: string, props: DemoProps) {
     let { renderer, scene } = props;
 
     let controls = setupVRControls(props);

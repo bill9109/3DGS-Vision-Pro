@@ -29,6 +29,11 @@
 4. 目前的移动方式：双指捏合，会向你当前朝向移动一个单位距离，想转向的话，扭头再双指捏合即可
 
 
+## 三星堆
+[![vr-demo](./assets/images/sanxingdui.jpg)](#sanxingdui)
+
+三星堆青铜人头像
+
 ## 五四运动纪念碑
 [![vr-demo](./assets/images/may4th.jpg)](#may4th)
 
@@ -68,3 +73,4 @@ Optimus
 [![vr-demo](./assets/images/Baltimore.jpg)](#Baltimore)
 
 撞断的桥
+

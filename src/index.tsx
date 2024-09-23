@@ -9,16 +9,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nord as syntaxTheme } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Camera, CineonToneMapping, Scene, WebGLRenderer } from 'three';
 import readme from '../README.md';
-import { DemoVR } from './DemoVR';
-import { DemoVRtest } from './DemoVRtest';
-import { chess } from './chess';
-import { davinci } from './davinci';
-import { subway } from './subway';
-import { tangbohu } from './tangbohu';
-import { teslabot } from './teslabot';
-import { car } from './car';
-import { Baltimore } from './Baltimore';
-import { may4th } from './may4th';
+import { initializeScene } from './initializeScene';
+import { sources } from './sceneConfigs';
 
 export type DemoProps = {
 	renderer: WebGLRenderer,
@@ -28,33 +20,11 @@ export type DemoProps = {
 	gui: GUI,
 }
 
-type DemoFn =
-	(props: DemoProps)
-		=> { dispose: () => void } | void;
-
-const demos = {
-	basic: {
-		"vr": DemoVR,
-		"vrtest": DemoVRtest,
-		"chess": chess,
-		"car": car,
-		"davinci": davinci,
-		"subway": subway,
-		"tangbohu": tangbohu,
-		"teslabot": teslabot,
-		"Baltimore": Baltimore,
-		"may4th": may4th,
-	} as Record<string, DemoFn>,
-	react: {
-	} as Record<string, React.FC<{ gui: GUI }>>
-}
-
 let globalGUI: GUI | null = null;
 
 function DemoScene(props: {
 	expanded: boolean,
-	demoBasicFn: DemoFn | null,
-	demoReactFn: React.FC<{ gui: GUI }> | null,
+	demoKey: string | null,
 	onExpandToggle: (expanded: boolean) => void,
 }) {
 	let { scene, gl: renderer, camera } = useThree();
@@ -111,8 +81,8 @@ function DemoScene(props: {
 			gui: globalGUI,
 		}
 
-		if (props.demoBasicFn) {
-			let demoDispose = props.demoBasicFn(demoProps)?.dispose;
+		if (props.demoKey) {
+			let demoDispose = initializeScene(props.demoKey, demoProps)?.dispose;
 
 			return () => {
 				// call .dispose() on all objects in the scene
@@ -128,7 +98,7 @@ function DemoScene(props: {
 				globalGUI = null;
 			}
 		}
-	}, []);
+	}, [props.demoKey]);
 
 	useEffect(() => {
 		// h key to hide/show gui
@@ -173,12 +143,11 @@ function DemoScene(props: {
 			}}
 			makeDefault
 		/>
-		{props.demoReactFn && gui && <props.demoReactFn gui={gui} />}
 	</>
 }
 
 function App() {
-	const demoKeys = Object.keys(demos.basic).concat(Object.keys(demos.react));
+	const demoKeys = Object.keys(sources);
 
 	const [demoKey, setDemoKey] = useState<string | null>(() => {
 		// get url parameter
@@ -205,9 +174,7 @@ function App() {
 		window.history.replaceState({}, '', url.href);
 	}, [showDocs]);
 
-	const demoBasicFn = demoKey != null ? demos.basic[demoKey] : null;
-	const demoReactFn = demoKey != null ? demos.react[demoKey] : null;
-	const hasDemo = demoBasicFn != null || demoReactFn != null;
+	const hasDemo = demoKey != null;
 	
 	useEffect(() => {
 		// react to url changes
@@ -314,8 +281,7 @@ function App() {
 				onExpandToggle={(expanded) => {
 					setShowDocs(!expanded);
 				}}
-				demoBasicFn={demoBasicFn}
-				demoReactFn={demoReactFn}
+				demoKey={demoKey}
 			/>
 		</Canvas>}
 	</>
