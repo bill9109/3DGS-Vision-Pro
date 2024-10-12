@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.tsx",
   "scripts": {
-    "build": "esbuild src/index.tsx --bundle --minify --outdir=dist --sourcemap",
+    "build": "esbuild src/index.tsx --bundle --minify --outdir=dist --sourcemap --loader:.md=text",
     "dev": "npx esbuild src/index.tsx --bundle --outdir=dist --sourcemap --preserve-symlinks --watch --serve=0.0.0.0:3002 --servedir=. --loader:.md=text",
     "start": "webpack serve --mode development",
     "deploy": "./misc/deploy.sh"
