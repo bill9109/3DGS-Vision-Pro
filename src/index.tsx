@@ -82,6 +82,7 @@ function DemoScene(props: {
 		}
 
 		if (props.demoKey) {
+			console.log('Initializing demo with key:', props.demoKey);
 			let demoDispose = initializeScene(props.demoKey, demoProps)?.dispose;
 
 			return () => {

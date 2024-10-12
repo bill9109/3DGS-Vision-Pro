@@ -113,5 +113,35 @@ export const sources: Record<string, SourceSettings> = {
         scale: { x: 0.3, y: 0.3, z: 0.3 },
         position: { x: 0, y: 1, z: -1 },
         rotation: { x: 0, y: 3.7 , z: 0 }
-    }
+    },
+    "goldmask": {
+        url: 'https://lumalabs.ai/capture/6935a527-34f4-4036-9799-be96a5482fe9',
+        scale: { x: 0.3, y: 0.3, z: 0.3 },
+        position: { x: 0, y: 1, z: -2 },
+        rotation: { x: -0.3 , y: 1 , z: 0.15 }
+    },
+    "Sea_of_Buddha": {
+        url: 'https://lumalabs.ai/capture/669839b8-9c0f-4193-bf36-e465d4d75e24',
+        scale: { x: 3, y: 3, z: 3 },
+        position: { x: 0, y: 1, z: -9 },
+        rotation: { x: 0.02, y: 0.09 , z: 0 }
+    },
+    "xin_jing": {
+        url: 'https://lumalabs.ai/capture/eab29aa6-fd5f-411e-86d3-f2d96016644e',
+        scale: { x: 8, y: 8, z: 8 },
+        position: { x: 0, y: 7, z: -20 },
+        rotation: { x: 0.09, y: 0 , z: -0.01 }
+    },
+    "Tutankhamun": {
+        url: 'https://lumalabs.ai/capture/dab01288-a30c-49e1-bfda-cd1ebe337f3f',
+        scale: { x: 1.2, y: 1.2, z: 1.2 },
+        position: { x: 0, y: 1, z: -4 },
+        rotation: { x: 0, y: -3.1 , z: 0.02 }
+    },
+    "Amon": {
+        url: 'https://lumalabs.ai/capture/5a589bc4-b6c3-449f-b9fb-349caf12f4a0',
+        scale: { x: 1, y: 1, z: 1 },
+        position: { x: 0, y: 1.5, z: -3 },
+        rotation: { x: 0, y: 3.1 , z: 0.02 }
+    },
 };

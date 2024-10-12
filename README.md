@@ -28,11 +28,35 @@
 3. 弹窗出来，允许权限
 4. 目前的移动方式：双指捏合，会向你当前朝向移动一个单位距离，想转向的话，扭头再双指捏合即可
 
+## 图坦卡蒙
+[![vr-demo](./assets/images/Tutankhamun.png)](#Tutankhamun)
+
+图坦卡蒙全身像
+
+## 阿蒙
+[![vr-demo](./assets/images/Amon.png)](#Amon)
+
+阿蒙头像
+
+## 黄金面具
+[![vr-demo](./assets/images/goldmask.png)](#goldmask)
+
+黄金面具
 
 ## 三星堆
 [![vr-demo](./assets/images/sanxingdui.jpg)](#sanxingdui)
 
 三星堆青铜人头像
+
+## 佛之海
+[![vr-demo](./assets/images/Sea_of_Buddha.png)](#Sea_of_Buddha)
+
+杉本博司《佛之海》
+
+## 心经
+[![vr-demo](./assets/images/xin_jing.png)](#xin_jing)
+
+杉本博司《心经》
 
 ## 五四运动纪念碑
 [![vr-demo](./assets/images/may4th.jpg)](#may4th)
