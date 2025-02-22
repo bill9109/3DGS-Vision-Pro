@@ -28,6 +28,16 @@
 3. 弹窗出来，允许权限
 4. 目前的移动方式：双指捏合，会向你当前朝向移动一个单位距离，想转向的话，扭头再双指捏合即可
 
+## Xiaomi YU7
+[![vr-demo](./assets/images/YU7.png)](#YU7)
+
+小米首款SUV
+
+## Xiaomi SU7 Ultra Prototype
+[![vr-demo](./assets/images/SU7_Ultra_Prototype.png)](#SU7_Ultra_Prototype)
+
+纽北最速四门车
+
 ## 图坦卡蒙
 [![vr-demo](./assets/images/Tutankhamun.png)](#Tutankhamun)
 

@@ -3,17 +3,15 @@ import { LumaSplatsThree } from "@lumaai/luma-web";
 import { DemoProps } from ".";
 import { setupVRControls } from './controls';
 import { sources } from './sceneConfigs';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-
-const SHOW_CAMERA_POSITION = true; // 控制是否显示摄像机位置
 
 export function initializeScene(capture: string, props: DemoProps) {
     console.log('Initializing scene with capture:', capture);
     let { renderer, scene, camera } = props;
 
-    let controls = setupVRControls(props);
-    console.log('VR controls set up');
+    let cameraGroup: THREE.Group;
+
+    let { cameraGroupRef, getUpdatedCameraGroupPosition, getUpdatedCameraGroupRotation, updateCameraGroupPosition } = setupVRControls(props);
+    cameraGroup = cameraGroupRef;
 
     let splats = new LumaSplatsThree({
         source: sources[capture].url,
@@ -24,6 +22,7 @@ export function initializeScene(capture: string, props: DemoProps) {
     console.log('Splats added to scene');
 
     function applyVRSettings(): void {
+        console.log('Applying VR settings');
         let settings = sources[capture];
         splats.scale.set(settings.scale.x, settings.scale.y, settings.scale.z);
         splats.position.set(settings.position.x, settings.position.y, settings.position.z + 1);
@@ -33,65 +32,41 @@ export function initializeScene(capture: string, props: DemoProps) {
 
     renderer.xr.addEventListener('sessionstart', applyVRSettings);
 
-    // 仅在开发模式下显示摄像机位置
-    if (SHOW_CAMERA_POSITION) {
-        console.log('Development mode: showing camera position');
-        const loader = new FontLoader();
-        let cameraPositionText: THREE.Mesh;
-        
-        loader.load('./fonts.json', function (font) {
-            console.log('Font loaded');
-            const textGeometry = new TextGeometry('Camera Position', {
-                font: font,
-                size: 0.5, // 增大字体大小
-                height: 0.1,
-            });
-            const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            cameraPositionText = new THREE.Mesh(textGeometry, textMaterial);
-            scene.add(cameraPositionText);
-            console.log('Camera position text added to scene');
-        });
+    let lastLogTime = 0;
+    const LOG_INTERVAL = 5000; // 5秒
 
-        // 在每帧更新时更新文本对象的位置和内容
-        renderer.setAnimationLoop(() => {
-            if (cameraPositionText) {
-                const { x, y, z } = camera.position;
-                cameraPositionText.position.set(x, y - 1, z - 2); // 调整文本位置，使其在摄像机前方
-                cameraPositionText.lookAt(camera.position); // 使文本面向摄像机
-
-                // 更新文本内容
-                const textGeometry = new TextGeometry(`Position: (${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)})`, {
-                    font: cameraPositionText.geometry.userData.font,
-                    size: 0.5, // 增大字体大小
-                    height: 0.1,
-                });
-                cameraPositionText.geometry.dispose();
-                cameraPositionText.geometry = textGeometry;
-                console.log(`Camera position updated: (${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)})`);
-            }
-        });
-
-        return {
-            dispose: () => {
-                splats.dispose();
-                controls.dispose();
-                if (cameraPositionText) {
-                    cameraPositionText.geometry.dispose();
-                    if (Array.isArray(cameraPositionText.material)) {
-                        cameraPositionText.material.forEach(material => material.dispose());
-                    } else {
-                        cameraPositionText.material.dispose();
-                    }
-                    scene.remove(cameraPositionText);
-                }
-            }
+    // 更新函数
+    function update(time: number, frame?: XRFrame) {
+        const currentTime = performance.now();
+        if (currentTime - lastLogTime > LOG_INTERVAL) {
+            console.log('Update function called, isPresenting:', renderer.xr.isPresenting);
+            lastLogTime = currentTime;
         }
-    } else {
-        return {
-            dispose: () => {
-                splats.dispose();
-                controls.dispose();
-            }
+
+        // 更新相机组位置
+        updateCameraGroupPosition(cameraGroup.position);
+
+        if (renderer.xr.isPresenting) {
+            // 在VR模式下执行特定的更新逻辑
+            console.log('VR模式：相机信息面板已更新');
+            console.log('当前相机位置:', cameraGroup.position.toArray());
+        }
+    }
+
+    // 设置动画循环
+    renderer.setAnimationLoop((time, frame) => {
+        if (renderer.xr.isPresenting) {
+            console.log('Animation loop running, time:', time);
+        }
+        update(time, frame);
+    });
+
+    return {
+        dispose: () => {
+            console.log('Disposing scene');
+            splats.dispose();
+            renderer.xr.removeEventListener('sessionstart', applyVRSettings);
+            renderer.setAnimationLoop(null);
         }
     }
 }
