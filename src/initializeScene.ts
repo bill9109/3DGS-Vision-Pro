@@ -10,7 +10,7 @@ export function initializeScene(capture: string, props: DemoProps) {
 
     let cameraGroup: THREE.Group;
 
-    let { cameraGroupRef, getUpdatedCameraGroupPosition, getUpdatedCameraGroupRotation, updateCameraGroupPosition } = setupVRControls(props);
+    let { cameraGroupRef, getUpdatedCameraGroupPosition, getUpdatedCameraGroupRotation, updateCameraGroupPosition, handleFrame } = setupVRControls(props, capture);
     cameraGroup = cameraGroupRef;
 
     let splats = new LumaSplatsThree({
@@ -32,33 +32,51 @@ export function initializeScene(capture: string, props: DemoProps) {
 
     renderer.xr.addEventListener('sessionstart', applyVRSettings);
 
+    // 不论是否VR模式，都应用设置
+    applyVRSettings();
+
     let lastLogTime = 0;
     const LOG_INTERVAL = 5000; // 5秒
 
     // 更新函数
     function update(time: number, frame?: XRFrame) {
         const currentTime = performance.now();
+        
+        // 确保每一帧都更新相机组位置
+        updateCameraGroupPosition(cameraGroup.position);
+        
+        // 添加此行，确保处理长按手势
+        if (frame) {
+            handleFrame(frame);
+        }
+        
         if (currentTime - lastLogTime > LOG_INTERVAL) {
             console.log('Update function called, isPresenting:', renderer.xr.isPresenting);
+            console.log('CameraGroup position:', cameraGroup.position.toArray().map(v => v.toFixed(1)));
             lastLogTime = currentTime;
         }
-
-        // 更新相机组位置
-        updateCameraGroupPosition(cameraGroup.position);
 
         if (renderer.xr.isPresenting) {
             // 在VR模式下执行特定的更新逻辑
             console.log('VR模式：相机信息面板已更新');
-            console.log('当前相机位置:', cameraGroup.position.toArray());
+            console.log('当前相机位置:', cameraGroup.position.toArray().map(v => v.toFixed(1)));
         }
+
+        renderer.render(scene, camera);
     }
 
     // 设置动画循环
     renderer.setAnimationLoop((time, frame) => {
-        if (renderer.xr.isPresenting) {
-            console.log('Animation loop running, time:', time);
+        try {
+            // 添加每帧调用日志
+            if (frame && renderer.xr.isPresenting) {
+                console.log('Animation loop with frame, 准备调用handleFrame');
+            }
+            
+            update(time, frame);
+        } catch (error) {
+            console.error('Error in animation loop:', error);
         }
-        update(time, frame);
     });
 
     return {

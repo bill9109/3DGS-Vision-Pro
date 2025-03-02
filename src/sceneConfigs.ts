@@ -147,8 +147,8 @@ export const sources: Record<string, SourceSettings> = {
     "YU7": {
         url: 'https://lumalabs.ai/capture/ec5a703a-a5a9-43eb-bea1-cd68d9604069',
         scale: { x: 2, y: 2, z: 2 },
-        position: { x: -4, y: 0, z: -4 },
-        rotation: { x: 0, y: 2 , z: -0.02 }
+        position: { x: 0.7, y: 0, z: -5.6 },
+        rotation: { x: 0, y: 0.98 , z: -0.02 }
     },
     "SU7_Ultra_Prototype": {
         url: 'https://lumalabs.ai/capture/a0475955-517c-44fd-8016-7e936ad32e59',
